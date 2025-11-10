@@ -1,0 +1,62 @@
+---
+title: "title"
+author: "author"
+date: "2025-09-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Libraries
+
+install.packages("DT")
+
+library(nycflights13)
+library(plotly)
+library(dplyr)
+library(DT)
+
+# Data import
+
+airlines <- nycflights13::airlines
+airports <- nycflights13::airports
+flights <- nycflights13::flights
+planes <- nycflights13::planes
+weather <- nycflights13::weather
+
+```
+
+# Exercice dplyr
+
+Count the number of records of planes and the sum of seats by company (display real name and not the code) and display it in a table
+
+
+```{r dplyr}
+
+# Use DT::datatable
+
+
+```
+
+# Exercice ggplot2
+
+Plot in a stacked bar plot the repartition of manufactureur by company for the top 5 companies in term of number of flights in 2013.
+
+```{r ggplot2, echo=FALSE}
+
+
+```
+
+# Exercice plotly
+
+Plot the relationship between departure delay (dep_delay) and arrival delay (arr_delay) for flights from JFK airport and color points by company and add a regression line for each company 
+
+```{r plotly, echo=FALSE}
+
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
