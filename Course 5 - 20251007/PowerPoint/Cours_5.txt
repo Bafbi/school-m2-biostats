@@ -1,0 +1,599 @@
+BIOSTATISTICS
+COURSE #5
+CLINICAL
+TRIALS
+OCTOBER 2025
+
+SUMMARY OF THE COURSE #5
+
+01
+
+INTRODUCTION
+
+04
+
+CLINICAL DOCUMENTS
+
+02
+
+SCIENTIFIC METHOD
+
+05
+
+SCIENTIFIC PUBLICATIONS
+
+03
+
+CLINICAL TRIALS
+
+06
+
+QUESTIONS
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5
+
+2
+
+INTRODUCTION
+
+INTRODUCTION
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / INTRODUCTION
+
+4
+
+SCIENTIFIC
+METHOD
+
+SCIENTIFIC METHOD
+DEFINITION
+• Empirical method for acquiring knowledge in science fields
+
+• Emerged in the 17th century
+• Involves careful observations with rigorous skepticism
+• Can be biased by cognitive assumptions
+• Formulation and test of hypotheses is key
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC METHOD
+
+6
+
+SCIENTIFIC METHOD
+BRIEF HISTORY
+• Ancient Egypt : Edwin Smith papyrus (~1600 BCE) :
+Egyptian medical textbook with first signs of empirical
+methodology : examination, diagnosis, treatment and prognosis
+• Classical antiquity :
+THALES (626/623 – 548/545 BCE) : first philosopher to use natural
+explanations.
+
+ARISTOTLE (384 – 322 BCE) : founder of Modern Science with the
+Aristotelianism movement : deductive logic, analytic inductive method.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC METHOD
+
+7
+
+SCIENTIFIC METHOD
+BRIEF HISTORY
+• Middle Ages :
+
+Ibn AL-HAYTHAM (965 - 1040) : Persian mathematician, astronomer and
+physicist considered as the father of modern optics
+
+Roger BACON (1219/1220 – 1292) : English scientist and polymath and
+founder of modern scientific method.
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC METHOD
+
+8
+
+SCIENTIFIC METHOD
+BRIEF HISTORY
+• Renaissance :
+
+Francis BACON (1561 – 1626) : English philosopher, father of
+empiricism (evidence finding through experiments).
+
+René DESCARTES (1596 – 1650) : father of modern philosophy and
+rationalism (“reason has precedence over other ways of acquiring
+knowledge : faith, sensory experience or tradition”)
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC METHOD
+
+9
+
+SCIENTIFIC METHOD
+BRIEF HISTORY
+• Scientific Revolution / Age of Enlightenment :
+
+Galileo GALILEI (1564 – 1642) : Italian astronomer, physicist and
+engineer, father of observational astronomy and modern science
+
+Isaac NEWTON (1642 – 1726/1727) : English mathematician, physicist
+and astronomer, founder of modern scientific method.
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC METHOD
+
+10
+
+SCIENTIFIC METHOD
+WORKFLOW
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 /SCIENTIFIC METHOD IN MEDICINE
+
+11
+
+CLINICAL
+TRIALS
+
+CLINICAL TRIALS
+DEFINITION
+• Prospective biomedical or behavioral research study on human participants
+designed to answer specific question about biomedical or behavioral
+interventions
+• Application domains : treatments (vaccines, drugs, chirurgy…),
+dietary supplements, medical devices
+
+• Strictly controlled, monitored and evaluated by international (FDA in the USA,
+EMEA in Europe) and national health authorities (ANSM in France).
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+13
+
+CLINICAL TRIALS
+BRIEF HISTORY
+Medical experiments exists from Antiquity but without any control group
+
+The first clinical trial was managed in 1747 by James LIND (1716 – 1794) :
+study of effect of various dietary supplements on scorbutic sailors during
+2 months on a boat.
+Scurvy : deficiency disease very common during long sailing travels.
+Symptoms : weakness, fatigue, decreased red blood cells,
+skin bleeding, poor wound healing and death from infection
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+14
+
+CLINICAL TRIALS
+BRIEF HISTORY
+Assumption to test : citrus fruit consumption is protective from
+scurvy (vitamin-C effect) : John WOODALL (1570 – 1643),
+surgeon of British East India Company
+12 sailors divided into 6 groups of 2 with different supplements :
+1. Cider
+2. Sulfuric acid
+3. Vinegar
+4. Seawater (control group)
+5. Oranges + lemon
+6. Spicy paste + barley water
+Only patients in group 5 quickly recovered from scurvy.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+15
+
+CLINICAL TRIALS
+BRIEF HISTORY
+John HAYGARTH (1740 – 1827) : English physician who demonstrated
+the importance of control group for the correct identification of
+placebo effect in smallpox studies.
+Ronald A. FISHER (1890 – 1962) : English statistician who proved
+the benefits of randomization, replication and blocks in clinical trials
+Austin BRADFORD HILL (1897 – 1991) : English epidemiologist who
+pioneered the randomized clinical trials (first proved link between
+cigarette smoking and lung cancer)
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+16
+
+CLINICAL TRIALS
+BIAS
+• Selection bias : systematic differences between baseline characteristics of the
+groups that are compared. Randomization helps to control it.
+
+• Performance bias : systematic differences between groups in the care that is
+provided, or in exposure to factors other than the interventions of interest.
+Blinding of treatment allocation helps to control it.
+• Attrition bias : systematic differences between groups in withdrawals from a
+study (missing values).
+• Reporting bias : systematic differences between reported and unreported
+findings.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+17
+
+CLINICAL TRIALS
+PHASES
+
+Many years + many costs + many drugs evaluated
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+18
+
+CLINICAL TRIALS
+PHASES
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+19
+
+CLINICAL TRIALS
+5 TYPES
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+20
+
+CLINICAL TRIALS
+COHORT STUDY : EXPOSURE → OUTCOME
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+21
+
+CLINICAL TRIALS
+CASE-CONTROL STUDY : EXPOSURE ← OUTCOME
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+22
+
+CLINICAL TRIALS
+CROSS-SECTIONAL STUDY : EXPOSURE
+
+OUTCOME
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+23
+
+CLINICAL TRIALS
+RANDOMIZED CLINICAL TRIAL (RCT)
+• Clinical trial with the highest level of evidence
+(Gold Standard
+in medical research)
+
+• Often with two-parallel groups studied during
+the same period of time (longitudinal study)
+• Patients are allocated randomly to a group,
+in order to have balanced groups (same
+characteristics)
+
+• Often two groups
+➢ Controlled : placebo or standard of care
+➢ New treatment
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+24
+
+CLINICAL TRIALS
+RANDOMIZED CLINICAL TRIAL – THREE POPULATIONS
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+25
+
+CLINICAL TRIALS
+RANDOMIZED CLINICAL TRIAL – PARALLEL TRIAL
+
+Advantages
+Can be applied to almost any disease.
+
+Disadvantages
+In multiple treatment groups statistics may become challenging.
+
+Any number of groups can be run simultaneously.
+
+Groups can be in separate locations.
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+26
+
+CLINICAL TRIALS
+RANDOMIZED CLINICAL TRIAL – CROSS-OVER TRIAL
+
+Advantages
+
+Disadvantages
+
+Low variance due to participant and control being the same. Requires a long-term illness as treatments are applied one after
+the other.
+Can include several treatments.
+
+Carry over effects need to be avoided (washout period must be
+sufficiently long).
+
+Groups can be in separate locations.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+27
+
+CLINICAL TRIALS
+RANDOMIZED CLINICAL TRIAL – MATCHED-PAIR TRIAL
+
+Advantages
+Less variability found in results, and it can be applied to
+most diseases.
+
+Disadvantages
+Based on similarity within the selected groups, the researcher
+needs awareness of factors that could influence results
+(confounding variables).
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+28
+
+CLINICAL TRIALS
+BLOCK RANDOMIZATION
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+29
+
+CLINICAL TRIALS
+PYRAMID OF EVIDENCE
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+30
+
+CLINICAL TRIALS
+CLINICAL TRIAL WORKFLOW
+
+Protocol
+& SAP
+writting
+
+Health
+Authorities
+approval
+
+Randomization
+& Blinding
+
+Conduct
+of the
+trial
+
+Database
+freeze
+
+Statistical
+analysis
+
+Unblinding
+& Clinical
+Study
+Report
+
+Submission
+to Health
+Authorities
+
+Publication
+&
+Marketing
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL TRIALS
+
+31
+
+CLINICAL
+DOCUMENTS
+
+CLINICAL DOCUMENTS
+GOOD CLINICAL PRACTICE
+• In 1945, the world discovered Nazi’s concentration camps and inhuman
+“medical” experiments performed there.The Doctors’ trial in Nuremberg in 1947
+condemned Nazi doctors to long prison
+(10 years to life imprisonment) or death sentences
+• International medical community decided to standardize
+medical trials, particularly the “ethical” side.
+• The Declaration of Helsinki in 1964 stated Good Clinical Practices (GCP), an
+international quality standard for clinical trials on humans.
+• GCP aims to protect human rights for the subjects and volunteers in a clinical
+trial.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+33
+
+CLINICAL DOCUMENTS
+CLINICAL TRIAL PROTOCOL
+• First document to write before launching the trial
+• Describes the objectives, design, methodology, statistical considerations and
+aspects related to the organization of a trial
+• Provide the background and rationale for conducting a study, highlighting
+specific research questions that are addressed, and taking into consideration
+ethical issues
+• Mandatory for ethics approval by local Ethics Committees or Institutional
+Review Boards.
+• Must meet a standard that adheres to the principles of Good Clinical Practice
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+34
+
+CLINICAL DOCUMENTS
+CLINICAL TRIAL PROTOCOL STRUCTURE
+1. Title page : general information of the trial
+2. Background information : prior knowledge
+3. Objectives / Purposes of the trial
+4. Study Design
+5. Selection / Exclusion of subjects
+6. Treatments
+7. Assessment of Efficacy / Safety
+8. Adverse Events
+9. Discontinuation of the Study
+10. Statistical methodology
+11. Quality Control and Assurance
+12. Ethics
+13. Data handling and recording
+14. Publication policy
+15. Project timetable / flowchart
+16. References
+17. Supplements / Appendices
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+35
+
+CLINICAL DOCUMENTS
+CLINICAL TRIAL PROTOCOL REVIEW
+
+20-30 minutes
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+36
+
+CLINICAL DOCUMENTS
+STATISTICAL ANALYSIS PLAN
+• Complementary document (appendix of protocol)
+• Details the scope of planned analysis :
+➢ Primary and secondary endpoints
+➢ Analysis methods
+➢ Pre-defined comparisons and significance levels
+➢ Exploratory analyses
+• Mandatory for regulatory agencies
+• Also provide the sample size calculation method used if applicable
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+37
+
+CLINICAL DOCUMENTS
+STATISTICAL ANALYSIS PLAN REVIEW
+
+20-30 minutes
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+38
+
+CLINICAL DOCUMENTS
+CLINICAL STUDY REPORT
+• Most important document
+• Summarizes study’s data and outcomes with tables, figures, listings…
+• Provides a detailed description of the study’s design and methodology
+• Part of the “package” sent to Health Authorities at the end of a trial with
+protocol, SAP, data.
+• Statistical analyzes are often validated by independent statisticians
+• Should respect ICH (International Council for Harmonisation of Technical
+Requirements for Pharmaceuticals for Human Use) guidelines
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+39
+
+SCIENTIFIC
+PUBLICATIONS
+
+SCIENTIFIC PUBLICATIONS
+BRIEF HISTORY
+• « Journal des sçavans » (France) : first scientific journal
+First edition : 5th January 1665
+• Publication of the first estimation of the speed of light by
+Ole RØMER in 1676
+•
+
+« Philosophical Transactions of the Royal Society » (United Kingdom) :
+second scientific journal. First edition : 6th March 1665
+
+•
+
+Publication du premier article scientifique d’Isaac NEWTON
+en 1672 : “New theory about light and colors”.
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC PUBLICATIONS
+
+41
+
+SCIENTIFIC PUBLICATIONS
+OVERVIEW
+•
+
+Allows to submit results of clinical trials to independent
+reviewers
+
+•
+
+Two types of journals : specialized or generalist journal
+
+•
+
+Several publication formats :
+➢ Review article
+➢ Letter
+➢ Research note
+➢ Data papers
+
+•
+
+Ranked according to “impact factor” (yearly mean number of
+citations of articles published in a journal)
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC PUBLICATIONS
+
+42
+
+SCIENTIFIC PUBLICATIONS
+STRUCTURE
+1. Title : Summary of the content of article in one short sentence
+
+2. Abstract : Summary of the article in 5 to 10 sentences structured in 4 parts :
+• Background/Objectives: include the hypothesis
+• Methods: Briefly explain the type of study, sample/population size and
+description, the design, and any particular techniques for data collection
+and analysis
+• Results: Essential data, including statistically significant data (use # & %)
+• Conclusions: Summarize interpretations of results and explain if hypothesis
+was supported or rejected
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC PUBLICATIONS
+
+43
+
+SCIENTIFIC PUBLICATIONS
+STRUCTURE
+3. Introduction : explain the context and the background of the work
+
+4. Material & methods :
+• Outline the design of experiment
+• Describe materials or subjects
+• Describe data collected and methods used for collection
+• Describe statistical analysis
+5. Results :
+• Describe study sample demographics
+• Present the data
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC PUBLICATIONS
+
+44
+
+SCIENTIFIC PUBLICATIONS
+STRUCTURE
+6. Discussion :
+• Relate major findings to your hypothesis
+• Include a focused review of literature in relation to results
+• Interpret the results
+• Discuss possible limitations of study
+• Suggest future work that could be done
+7. References : links to the studies / works in the literature cited as reference in
+the text of the article
+
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / SCIENTIFIC PUBLICATIONS
+
+45
+
+SCIENTIFIC PUBLICATIONS
+ARTICLE REVIEW
+
+20-30 minutes
+OCTOBER 2025 / JUNIA ISEN / BIOSTATISTICS COURSE #5 / CLINICAL DOCUMENTS
+
+46
+
+QUESTIONS
+
+THANK
+YOU
+FOR
+YOUR
+ATTENTION
+OCTOBER 2025
+
+
