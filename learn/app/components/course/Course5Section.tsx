@@ -1,5 +1,30 @@
 // app/components/course/Course5Section.tsx
 import React from 'react';
+import InteractiveWorkflow from './course5/InteractiveWorkflow';
+import PhasesTimeline from './course5/PhasesTimeline';
+import BiasExplorer from './course5/BiasExplorer';
+import TrialTypeSelector from './course5/TrialTypeSelector';
+import EvidencePyramid from './course5/EvidencePyramid';
+
+const scientificMethodWorkflow = [
+  { title: 'Observation', description: 'The process of gathering information about events or processes in a careful, orderly way.' },
+  { title: 'Hypothesis', description: 'A proposed scientific explanation for a set of observations.' },
+  { title: 'Experimentation', description: 'The testing of a hypothesis by performing a controlled experiment.' },
+  { title: 'Data Analysis', description: 'The process of inspecting, cleansing, transforming, and modeling data with the goal of discovering useful information.' },
+  { title: 'Conclusion', description: 'A statement that sums up what you have learned from an experiment.' },
+];
+
+const clinicalTrialWorkflow = [
+  { title: 'Protocol & SAP writing', description: 'Designing the trial and planning the statistical analysis.' },
+  { title: 'Health Authorities approval', description: 'Getting approval from regulatory bodies to conduct the trial.' },
+  { title: 'Randomization & Blinding', description: 'Assigning participants to groups and concealing the treatment allocation.' },
+  { title: 'Conduct of the trial', description: 'Running the trial according to the protocol.' },
+  { title: 'Database freeze', description: 'Locking the database to prevent further changes.' },
+  { title: 'Statistical analysis', description: 'Analyzing the collected data.' },
+  { title: 'Unblinding & Clinical Study Report', description: 'Revealing the treatment allocation and writing the final report.' },
+  { title: 'Submission to Health Authorities', description: 'Submitting the results to regulatory bodies for approval.' },
+  { title: 'Publication & Marketing', description: 'Publishing the results and marketing the new treatment.' },
+];
 
 const Course5Section: React.FC = () => {
   return (
@@ -36,11 +61,7 @@ const Course5Section: React.FC = () => {
         </ul>
 
         <h3 className="text-xl font-medium mb-2">Workflow</h3>
-        <p className="mb-4">
-          The scientific method involves a systematic workflow, typically including observation,
-          hypothesis formulation, experimentation, data analysis, and conclusion.
-          (Further interactive elements or diagrams can be added here later).
-        </p>
+        <InteractiveWorkflow steps={scientificMethodWorkflow} />
       </section>
 
       <section>
@@ -61,46 +82,19 @@ const Course5Section: React.FC = () => {
         </ul>
 
         <h3 className="text-xl font-medium mb-2">Bias in Clinical Trials</h3>
-        <ul className="list-disc list-inside ml-4 mb-4">
-          <li><strong>Selection bias:</strong> Systematic differences between baseline characteristics of compared groups. Controlled by randomization.</li>
-          <li><strong>Performance bias:</strong> Systematic differences in care or exposure to factors other than interventions. Controlled by blinding.</li>
-          <li><strong>Attrition bias:</strong> Systematic differences in withdrawals from a study (missing values).</li>
-          <li><strong>Reporting bias:</strong> Systematic differences between reported and unreported findings.</li>
-        </ul>
+        <BiasExplorer />
 
         <h3 className="text-xl font-medium mb-2">Phases of Clinical Trials</h3>
-        <p className="mb-4">
-          Clinical trials typically progress through several phases, each designed to answer different questions and gather specific data. This process involves significant time and cost, with many drugs evaluated.
-          (Interactive visualization of phases can be added here).
-        </p>
+        <PhasesTimeline />
 
         <h3 className="text-xl font-medium mb-2">Types of Clinical Trials</h3>
-        <ul className="list-disc list-inside ml-4 mb-4">
-          <li><strong>Cohort Study:</strong> Exposure → Outcome</li>
-          <li><strong>Case-Control Study:</strong> Exposure ← Outcome</li>
-          <li><strong>Cross-Sectional Study:</strong> Exposure & Outcome at a single point in time.</li>
-          <li><strong>Randomized Clinical Trial (RCT):</strong>
-            <ul className="list-circle list-inside ml-6">
-              <li>Highest level of evidence (&quot;Gold Standard&quot;).</li>
-              <li>Often two-parallel groups studied longitudinally.</li>
-              <li>Patients randomly allocated to groups for balanced characteristics.</li>
-              <li>Typically two groups: &quot;Controlled&quot; (placebo or standard of care) and New treatment.</li>
-              <li>Variations: Parallel Trial, Cross-Over Trial, Matched-Pair Trial.</li>
-            </ul>
-          </li>
-        </ul>
+        <TrialTypeSelector />
 
         <h3 className="text-xl font-medium mb-2">Pyramid of Evidence</h3>
-        <p className="mb-4">
-          The pyramid of evidence illustrates the hierarchy of different study designs based on their strength of evidence. RCTs are at the top.
-          (Diagram or interactive element can be added here).
-        </p>
+        <EvidencePyramid />
 
         <h3 className="text-xl font-medium mb-2">Clinical Trial Workflow</h3>
-        <p className="mb-4">
-          The workflow of a clinical trial involves several key stages, from protocol writing to publication and marketing.
-          (Interactive flowchart can be added here).
-        </p>
+        <InteractiveWorkflow steps={clinicalTrialWorkflow} />
       </section>
 
       <section>
@@ -136,7 +130,7 @@ const Course5Section: React.FC = () => {
         <ul className="list-disc list-inside ml-4 mb-4">
           <li>Most important document, summarizing study data and outcomes.</li>
           <li>Provides detailed description of study design and methodology.</li>
-          <li>Part of the "package" sent to Health Authorities.</li>
+          <li>Part of the &quot;package&quot; sent to Health Authorities.</li>
           <li>Statistical analyses often validated by independent statisticians.</li>
           <li>Should respect ICH guidelines.</li>
         </ul>
@@ -155,7 +149,7 @@ const Course5Section: React.FC = () => {
           <li>Allows submission of clinical trial results to independent reviewers.</li>
           <li>Two types of journals: specialized or generalist.</li>
           <li>Several publication formats: Review article, Letter, Research note, Data papers.</li>
-          <li>Ranked according to "impact factor" (yearly mean number of citations).</li>
+          <li>Ranked according to &quot;impact factor&quot; (yearly mean number of citations).</li>
           <li><a href="/documents/NEJMoa2110345_article.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">View Example Article (PDF)</a></li>
         </ul>
 
