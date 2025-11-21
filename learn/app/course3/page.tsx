@@ -18,17 +18,20 @@ const quizQuestions = [
   {
     question: "What is the main difference between linear regression and logistic regression?",
     options: ["Logistic uses categorical predictors", "Logistic predicts probabilities for binary outcomes", "Logistic requires more data", "Logistic is for time series"],
-    answer: 1
+    answer: 1,
+    explanation: "Logistic regression is specifically designed for binary outcomes (0/1, Yes/No), predicting the probability of the event occurring."
   },
   {
     question: "When would you use Poisson regression?",
     options: ["For continuous outcomes", "For count data", "For binary outcomes", "For time-to-event data"],
-    answer: 1
+    answer: 1,
+    explanation: "Poisson regression is used for count data (e.g., number of hospital visits, number of emails), where the outcome is a non-negative integer."
   },
   {
     question: "What does ANOVA test?",
     options: ["Differences between two means", "Differences between multiple means", "Relationships between variables", "Normality of data"],
-    answer: 1
+    answer: 1,
+    explanation: "ANOVA (Analysis of Variance) tests if there are statistically significant differences between the means of three or more independent groups."
   }
 ];
 
@@ -168,7 +171,15 @@ model <- lm(log(y) ~ x, data = df)`} />
             {selectedAnova === 'ANOVA' && (
               <div>
                 <h3 className="text-black">Analysis of Variance (ANOVA)</h3>
-                <p className="text-gray-900 mb-2">Tests if means differ across 3+ groups.</p>
+                <p className="text-gray-900 mb-2"><strong>The "Signal vs Noise" Analogy:</strong></p>
+                <p className="text-gray-900 mb-2">
+                  Imagine trying to hear a friend in a crowded room.
+                  <br />
+                  <strong>Signal (Between Groups):</strong> Your friend's voice (the difference we want to find).
+                  <br />
+                  <strong>Noise (Within Groups):</strong> The crowd's chatter (random variation).
+                </p>
+                <p className="text-gray-900 mb-4">ANOVA asks: Is the Signal louder than the Noise?</p>
                 <AnovaVisualization />
                 <CodeBlock code={`# One-way ANOVA
 result <- aov(y ~ group, data = df)
@@ -176,29 +187,36 @@ summary(result)
 
 # Post-hoc tests
 TukeyHSD(result)`} />
-                <p className="text-gray-900">Assumes normality and equal variances; use Tukey HSD for pairwise comparisons.</p>
               </div>
             )}
             {selectedAnova === 'ANCOVA' && (
               <div>
                 <h3 className="text-black">Analysis of Covariance (ANCOVA)</h3>
-                <p className="text-gray-900 mb-2">ANOVA while controlling for a continuous covariate.</p>
+                <p className="text-gray-900 mb-2"><strong>The "Noise Cancelling Headphones" Analogy:</strong></p>
+                <p className="text-gray-900 mb-2">
+                  Sometimes the "Noise" is caused by something specific (like Age or Weight).
+                  ANCOVA is like putting on noise-cancelling headphones to filter out that specific distraction, making the "Signal" (Group Effect) clear.
+                </p>
                 <AncovaVisualization />
                 <CodeBlock code={`# ANCOVA
 result <- aov(y ~ group + covariate, data = df)
 summary(result)`} />
-                <p className="text-gray-900">Adjusts for confounding variables; covariate should be measured, not manipulated.</p>
               </div>
             )}
             {selectedAnova === 'MANOVA' && (
               <div>
                 <h3 className="text-black">Multivariate ANOVA (MANOVA)</h3>
-                <p className="text-gray-900 mb-2">Tests differences across multiple dependent variables simultaneously.</p>
+                <p className="text-gray-900 mb-2"><strong>The "Combo Meal" Analogy:</strong></p>
+                <p className="text-gray-900 mb-2">
+                  Instead of asking "Is the burger good?" and "Are the fries good?" separately, MANOVA asks "Is the <strong>Combo Meal</strong> good?"
+                </p>
+                <p className="text-gray-900 mb-4">
+                  It tests multiple outcomes at once, which can reveal differences that separate tests miss.
+                </p>
                 <ManovaVisualization />
                 <CodeBlock code={`# MANOVA
 result <- manova(cbind(y1, y2) ~ group, data = df)
 summary(result)`} />
-                <p className="text-gray-900">More powerful than separate ANOVAs; controls for multiple testing.</p>
               </div>
             )}
           </div>

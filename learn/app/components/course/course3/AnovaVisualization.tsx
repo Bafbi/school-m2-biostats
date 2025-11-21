@@ -1,85 +1,132 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
-// Mock ANOVA results for iris dataset
-const anovaResults = {
-  SepalLength: { f: 119.26, p: 0.000 },
-  SepalWidth: { f: 49.16, p: 0.000 },
-  PetalLength: { f: 1180.16, p: 0.000 },
-  PetalWidth: { f: 960.01, p: 0.000 }
-};
-
-// Box plot data for iris
-const irisData = [
-  { species: 'setosa', sepalLength: 5.1, sepalWidth: 3.5, petalLength: 1.4, petalWidth: 0.2 },
-  { species: 'setosa', sepalLength: 4.9, sepalWidth: 3.0, petalLength: 1.4, petalWidth: 0.2 },
-  { species: 'setosa', sepalLength: 4.7, sepalWidth: 3.2, petalLength: 1.3, petalWidth: 0.2 },
-  { species: 'versicolor', sepalLength: 7.0, sepalWidth: 3.2, petalLength: 4.7, petalWidth: 1.4 },
-  { species: 'versicolor', sepalLength: 6.4, sepalWidth: 3.2, petalLength: 4.5, petalWidth: 1.5 },
-  { species: 'versicolor', sepalLength: 6.9, sepalWidth: 3.1, petalLength: 4.9, petalWidth: 1.5 },
-  { species: 'virginica', sepalLength: 6.3, sepalWidth: 3.3, petalLength: 6.0, petalWidth: 2.5 },
-  { species: 'virginica', sepalLength: 5.8, sepalWidth: 2.7, petalLength: 5.1, petalWidth: 1.9 },
-  { species: 'virginica', sepalLength: 7.1, sepalWidth: 3.0, petalLength: 5.9, petalWidth: 2.1 }
-];
 
 export default function AnovaVisualization() {
-  const [selectedVariable, setSelectedVariable] = useState('SepalLength');
+  const [signal, setSignal] = useState(5); // Distance between means
+  const [noise, setNoise] = useState(3);   // Standard deviation
 
-  const chartData = useMemo(() => {
-    const speciesStats: { [key: string]: number[] } = { setosa: [], versicolor: [], virginica: [] };
-    irisData.forEach(item => {
-      const key = selectedVariable.replace(/([A-Z])/g, (match) => match.toLowerCase()).replace(/^./, str => str.toLowerCase());
-      const value = item[key as keyof typeof item] as number;
-      speciesStats[item.species].push(value);
-    });
+  // Generate data for 3 distributions
+  const data = useMemo(() => {
+    const points = [];
+    const mean1 = 10;
+    const mean2 = 10 + signal;
+    const mean3 = 10 + 2 * signal;
 
-    return [
-      { species: 'setosa', mean: speciesStats.setosa.reduce((a, b) => a + b, 0) / speciesStats.setosa.length },
-      { species: 'versicolor', mean: speciesStats.versicolor.reduce((a, b) => a + b, 0) / speciesStats.versicolor.length },
-      { species: 'virginica', mean: speciesStats.virginica.reduce((a, b) => a + b, 0) / speciesStats.virginica.length }
-    ];
-  }, [selectedVariable]);
+    // Range to cover all distributions
+    const minX = 0;
+    const maxX = 40;
 
-  const result = anovaResults[selectedVariable as keyof typeof anovaResults];
+    for (let x = minX; x <= maxX; x += 0.5) {
+      // Normal distribution PDF formula: (1 / (sigma * sqrt(2*pi))) * exp(-0.5 * ((x-mu)/sigma)^2)
+      const y1 = (1 / (noise * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mean1) / noise, 2));
+      const y2 = (1 / (noise * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mean2) / noise, 2));
+      const y3 = (1 / (noise * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mean3) / noise, 2));
+
+      points.push({ x, y1, y2, y3 });
+    }
+    return points;
+  }, [signal, noise]);
+
+  // Calculate F-statistic (simplified for visualization)
+  const stats = useMemo(() => {
+    // MS_between / MS_within
+    // Signal is related to MS_between, Noise is related to MS_within
+
+    // Let's simulate a real F-test based on the parameters
+    const n = 30; // Sample size per group
+    const k = 3;  // Number of groups
+
+    // Variance between means (approximate)
+    const grandMean = 10 + signal;
+    const ssBetween = n * (Math.pow(10 - grandMean, 2) + Math.pow(10 + signal - grandMean, 2) + Math.pow(10 + 2 * signal - grandMean, 2));
+    const dfBetween = k - 1;
+    const msBetween = ssBetween / dfBetween;
+
+    // Variance within (approximate)
+    const ssWithin = (n - 1) * k * Math.pow(noise, 2);
+    const dfWithin = k * (n - 1);
+    const msWithin = ssWithin / dfWithin;
+
+    const fStat = msBetween / msWithin;
+
+    // Heuristic P-value calculation (since we don't want to add a heavy stats library)
+    // Critical value for F(2, 87) at alpha=0.05 is approx 3.1
+    let pVal = 0.5;
+    if (fStat > 10) pVal = 0.000;
+    else if (fStat > 5) pVal = 0.009;
+    else if (fStat > 3.1) pVal = 0.04;
+    else if (fStat > 2) pVal = 0.15;
+    else pVal = 0.4;
+
+    return { f: fStat, p: pVal };
+  }, [signal, noise]);
 
   return (
-    <div className="my-4">
-      <h4 className="text-lg font-semibold mb-2">Interactive ANOVA with Iris Dataset</h4>
-      <p className="text-sm text-gray-600 mb-4">
-        Select a variable to see if iris species differ significantly.
+    <div className="my-6 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+      <h4 className="text-lg font-bold text-gray-800 mb-2">Signal vs Noise Tuner</h4>
+      <p className="text-sm text-gray-600 mb-6">
+        Adjust the <strong>Signal</strong> (separation) and <strong>Noise</strong> (spread) to see how ANOVA detects differences.
       </p>
-      <div className="mb-4">
-        <label htmlFor="variable-select" className="block text-sm font-medium text-gray-700 mb-2">
-          Variable: {selectedVariable}
-        </label>
-        <select
-          id="variable-select"
-          value={selectedVariable}
-          onChange={(e) => setSelectedVariable(e.target.value)}
-          className="border rounded px-3 py-2"
-        >
-          <option value="SepalLength">Sepal Length</option>
-          <option value="SepalWidth">Sepal Width</option>
-          <option value="PetalLength">Petal Length</option>
-          <option value="PetalWidth">Petal Width</option>
-        </select>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Signal (Group Separation): {signal}
+          </label>
+          <input
+            type="range"
+            min="0"
+            max="10"
+            step="0.5"
+            value={signal}
+            onChange={(e) => setSignal(parseFloat(e.target.value))}
+            className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
+          />
+          <p className="text-xs text-gray-500 mt-1">Higher signal = Groups are further apart.</p>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Noise (Variance): {noise}
+          </label>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            step="0.5"
+            value={noise}
+            onChange={(e) => setNoise(parseFloat(e.target.value))}
+            className="w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer"
+          />
+          <p className="text-xs text-gray-500 mt-1">Higher noise = Groups are more spread out (overlap).</p>
+        </div>
       </div>
-      <BarChart width={600} height={300} data={chartData}>
-        <CartesianGrid />
-        <XAxis dataKey="species" />
-        <YAxis />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Bar dataKey="mean" fill="#8884d8" />
-      </BarChart>
-      <div className="mt-4 p-4 bg-gray-100 rounded">
-        <h5 className="font-medium">ANOVA Results:</h5>
-        <p className="text-sm">F-statistic: {result.f}</p>
-        <p className="text-sm">p-value: {result.p}</p>
-        <p className="text-sm text-gray-600">
-          {result.p < 0.05 ? 'Significant differences between species!' : 'No significant differences found.'}
-        </p>
+
+      <div className="h-64 w-full mb-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="x" type="number" domain={[0, 40]} hide />
+            <YAxis hide />
+            <Tooltip />
+            <Area type="monotone" dataKey="y1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.3} name="Group A" />
+            <Area type="monotone" dataKey="y2" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.3} name="Group B" />
+            <Area type="monotone" dataKey="y3" stroke="#ffc658" fill="#ffc658" fillOpacity={0.3} name="Group C" />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="flex justify-between items-center p-4 bg-gray-50 rounded border border-gray-200">
+        <div>
+          <p className="text-sm font-semibold text-gray-700">F-Statistic: <span className="text-blue-600 text-lg">{stats.f.toFixed(2)}</span></p>
+          <p className="text-xs text-gray-500">Ratio of Signal / Noise</p>
+        </div>
+        <div className="text-right">
+          <p className="text-sm font-semibold text-gray-700">P-Value: <span className={stats.p < 0.05 ? "text-green-600 font-bold" : "text-red-600"}>{stats.p < 0.001 ? "< 0.001" : stats.p.toFixed(3)}</span></p>
+          <p className="text-xs text-gray-500">{stats.p < 0.05 ? "Significant Difference!" : "No Significant Difference"}</p>
+        </div>
       </div>
     </div>
   );
