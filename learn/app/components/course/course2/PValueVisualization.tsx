@@ -90,6 +90,13 @@ export default function PValueVisualization({ alpha = 0.05, pValue = 0.02 }: PVa
         {hovered === 'alpha' && "The red area shows the rejection region for &alpha; (Type I error rate)."}
         {hovered === 'pvalue' && "The blue area shows where the observed p-value falls (more extreme than &alpha;, so reject H0)."}
       </p>
+      <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-gray-800">
+        <strong>The "Surprise Factor":</strong> Think of the P-value as a measure of surprise.
+        <ul className="list-disc list-inside mt-1">
+          <li><strong>High P-value:</strong> Not surprised. "This happens all the time." (Keep H0)</li>
+          <li><strong>Low P-value:</strong> Very surprised! "This is rare/impossible if H0 is true." (Reject H0)</li>
+        </ul>
+      </div>
     </div>
   );
 }
