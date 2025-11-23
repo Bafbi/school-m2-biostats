@@ -1,0 +1,9 @@
+[tools]
+node = "lts"
+pnpm = "latest"
+
+[tasks]
+dev = { run = "pnpm run dev", description = "Start development server" }
+build = { run = "pnpm run build", description = "Build the application" }
+start = { run = "pnpm run start", description = "Start production server" }
+lint = { run = "pnpm run lint", description = "Run linter" }
