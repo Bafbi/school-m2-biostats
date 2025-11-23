@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import CodeBlock from '@/components/ui/CodeBlock';
 import { wineFamdContrib } from './course4Data';
 
@@ -15,13 +15,17 @@ export default function FAMDExplorer() {
 fviz_famd_ind(res.famd)
 fviz_famd_var(res.famd, 'contrib')`} />
 
-      <BarChart width={600} height={220} data={wineFamdContrib} className="mt-4">
-        <CartesianGrid />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip formatter={(value: number) => `${value}% contribution`} />
-        <Bar dataKey="value" fill="#f97316" />
-      </BarChart>
+      <div className="h-[250px] w-full mt-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={wineFamdContrib}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip formatter={(value: number) => `${value}% contribution`} />
+            <Bar dataKey="value" fill="#f97316" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
