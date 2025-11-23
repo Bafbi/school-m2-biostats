@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biostatistics Exam Cheat Sheet - Junia ISEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .page-break { break-after: page; }
+            @page { margin: 0.5cm; size: A4; }
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .code-snippet { font-family: 'Courier New', Courier, monospace; background-color: #f1f5f9; padding: 1px 2px; border-radius: 3px; color: #d63384; font-weight: bold; }
+        .section-box { border: 1px solid #e2e8f0; border-radius: 0.375rem; padding: 0.25rem; height: 100%; font-size: 9px; line-height: 1.15; }
+        h1 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.25rem; text-transform: uppercase; color: #1e3a8a; border-bottom: 2px solid #1e3a8a; }
+        h2 { font-size: 0.8rem; font-weight: 700; color: #0f172a; margin-top: 0.15rem; margin-bottom: 0.08rem; background-color: #e2e8f0; padding: 1px; }
+        h3 { font-size: 0.7rem; font-weight: 700; color: #334155; margin-top: 0.12rem; text-decoration: underline; }
+        p, li, td { font-size: 9px; }
+        ul { list-style-type: disc; margin-left: 1rem; }
+        .warn { color: #dc2626; font-weight: bold; }
+        .good { color: #16a34a; font-weight: bold; }
+        .func { color: #2563eb; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; font-size: 9px; }
+        th, td { border: 1px solid #cbd5e1; padding: 1px; text-align: left; }
+        th { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <!-- PAGE 1: BASICS & HYPOTHESIS TESTING -->
+    <div class="page-break grid grid-cols-3 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+        
+        <div class="col-span-3">
+            <h1>Pg 1: Foundations & Univariate Tests (Cours 2, 3)</h1>
+        </div>
+
+        <div class="section-box col-span-2 bg-indigo-50 border-indigo-200">
+            <h2 class="text-indigo-900 bg-indigo-100">KEY DEFINITIONS: MULTIVARIATE &amp; ML</h2>
+            <div class="grid grid-cols-3 gap-1 text-[9px]">
+                <div><span class="font-bold text-indigo-700">Eigenvalue:</span> Amount of variance explained by a specific Principal Component.</div>
+                <div><span class="font-bold text-indigo-700">Orthogonal:</span> Perpendicular / Uncorrelated (Angle = 90 deg).</div>
+                <div><span class="font-bold text-indigo-700">Inertia:</span> Term for Variance in Factorial Analysis.</div>
+                <div><span class="font-bold text-indigo-700">Centroid:</span> The geometric center of a cluster (Mean position of points).</div>
+                <div><span class="font-bold text-indigo-700">Supervised Learning:</span> Data has labels/answers (Y is known). e.g., Regression, LDA.</div>
+                <div><span class="font-bold text-indigo-700">Unsupervised Learning:</span> No labels. Finding structure. e.g., PCA, K-Means.</div>
+                <div><span class="font-bold text-indigo-700">Overfitting:</span> Model learns "noise" instead of signal. High accuracy on Train, low on Test.</div>
+                <div><span class="font-bold text-indigo-700">Pruning:</span> Cutting back a Decision Tree to prevent overfitting.</div>
+            </div>
+        </div>
+
+        <div class="section-box col-span-2 bg-indigo-50 border-indigo-200">
+            <h2 class="text-indigo-900 bg-indigo-100">KEY DEFINITIONS: MODELING</h2>
+            <div class="grid grid-cols-3 gap-1 text-[9px]">
+                <div><span class="font-bold text-indigo-700">Residuals:</span> Difference between Actual value (Y) and Predicted value (Y-hat).</div>
+                <div><span class="font-bold text-indigo-700">R-Squared:</span> % of variance in Y explained by X. (Higher is usually better).</div>
+                <div><span class="font-bold text-indigo-700">Homoscedasticity:</span> Constant variance of residuals (Required for Linear Models).</div>
+                <div><span class="font-bold text-indigo-700">Multicollinearity:</span> When predictors (Xs) are correlated with each other (Bad).</div>
+                <div><span class="font-bold text-indigo-700">Interaction:</span> When the effect of Factor A changes depending on Factor B.</div>
+                <div><span class="font-bold text-indigo-700">Maximum Likelihood (MLE):</span> Algorithm used in GLM to find parameters that maximize prob of data.</div>
+                <div><span class="font-bold text-indigo-700">Link Function:</span> Function connecting the linear predictor to the mean of the distribution (e.g., Logit).</div>
+                <div><span class="font-bold text-indigo-700">Overdispersion:</span> When Variance &gt; Mean in Poisson data (Need Negative Binomial).</div>
+            </div>
+        </div>
+
+        <!-- Col 1: Concepts -->
+        <div class="section-box col-span-1">
+            <h2>1. Hypothesis Testing Core</h2>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>H0 (Null):</strong> No effect / No difference / Randomness.</li>
+                <li><strong>H1 (Alt):</strong> Effect exists / Difference exists.</li>
+                <li><strong>p-value:</strong> Prob. of observing results if H0 is true.</li>
+                <li><span class="warn">Rule:</span> If p < &alpha; (0.05) &rarr; <span class="warn">Reject H0</span> (Significant).</li>
+                <li><span class="good">Rule:</span> If p > &alpha; (0.05) &rarr; <span class="good">Fail to reject H0</span> (Not sig).</li>
+                <li><strong>Alpha (&alpha;):</strong> Type I error (False Positive). usually 5%.</li>
+                <li><strong>Beta (&beta;):</strong> Type II error (False Negative).</li>
+                <li><strong>Power (1-&beta;):</strong> Ability to detect an effect if it exists. Increases with N.</li>
+            </ul>
+
+            <h2>2. Descriptive Stats & R Basics</h2>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Measures:</strong> Mean (Sensitive to outliers), Median (Robust), SD (Spread).</li>
+                <li><strong>Skewness:</strong> 0=Normal, >0 Right tail (Mean>Med), <0 Left tail.</li>
+                <li><strong>Kurtosis:</strong> Tails weight. Normal=3 (or 0 excess).</li>
+                <li><span class="func">summary(df)</span>: Quick stats for all cols.</li>
+                <li><span class="func">table(df$cat)</span>: Counts for factors.</li>
+                <li><span class="func">prop.table()</span>: Convert counts to %.</li>
+            </ul>
+        </div>
+
+        <!-- Col 2: Assumptions -->
+        <div class="section-box col-span-1">
+            <h2>3. Crucial Assumptions (Check FIRST)</h2>
+            <div class="mb-1">
+                <h3>A. Normality (Gaussian)</h3>
+                <p><strong>Visual:</strong> Histogram (Bell curve), Q-Q Plot (Points on line).</p>
+                <p><strong>Test:</strong> <span class="func">shapiro.test(x)</span></p>
+                <p class="text-[9px]">
+                    H0: Distribution IS Normal.<br>
+                    p > 0.05 &rarr; <span class="good">Normal (Parametric OK)</span><br>
+                    p < 0.05 &rarr; <span class="warn">Not Normal (Use Non-Parametric)</span>
+                </p>
+            </div>
+            <div class="mb-1">
+                <h3>B. Homogeneity of Variance (Homoscedasticity)</h3>
+                <p><strong>Test:</strong> <span class="func">var.test(x,y)</span> (2 grps) or <span class="func">bartlett.test(y~grp)</span></p>
+                <p class="text-[9px]">
+                    H0: Variances are EQUAL.<br>
+                    p > 0.05 &rarr; <span class="good">Equal Var (Student T OK)</span><br>
+                    p < 0.05 &rarr; <span class="warn">Diff Var (Use Welch T)</span>
+                </p>
+            </div>
+            <div>
+                <h3>C. Independence</h3>
+                <p>Are groups Paired (Before/After) or Independent?</p>
+            </div>
+        </div>
+
+        <!-- Col 3: Outliers & Distribution -->
+        <div class="section-box col-span-1">
+            <h2>4. Distributions & Outliers</h2>
+            <ul>
+                <li><strong>Normal:</strong> Continuous, Bell shape. <span class="func">rnorm()</span></li>
+                <li><strong>Poisson:</strong> Count data, Mean=Var. <span class="func">rpois()</span></li>
+                <li><strong>Binomial:</strong> Success/Fail (n trials). <span class="func">rbinom()</span></li>
+                <li><strong>Uniform:</strong> Equal prob. <span class="func">runif()</span></li>
+            </ul>
+            <h3>Outliers (Grubbs Test)</h3>
+            <p>Pkg: <code>outliers</code>. <span class="func">grubbs.test(x)</span></p>
+            <p>H1: Highest/Lowest value is an outlier.</p>
+        </div>
+
+        <div class="section-box col-span-1">
+            <h2>Theory "Traps" (Don't fall for these!)</h2>
+            <ul>
+                <li><strong>p-value definition:</strong> It is NOT the probability that H0 is true. It is the probability of the DATA given H0 is true.</li>
+                <li><strong>CI 95%:</strong> It does NOT mean "95% chance the true mean is in here." It means "If we repeated the study 100 times, 95 of the intervals would contain the true mean."</li>
+                <li><strong>Correlation != Causation:</strong> High r (0.9) does not mean X causes Y. It could be a third variable (Z).</li>
+                <li><strong>Non-Parametric:</strong> Does NOT mean "no assumptions." It means "no assumption of normal distribution." (Still assumes independence/randomness).</li>
+            </ul>
+        </div>
+
+        <!-- BOTTOM: KEY DEFINITIONS + DECISION TREE -->
+
+        <div class="section-box col-span-3 bg-indigo-50 border-indigo-200">
+            <h2 class="text-indigo-900 bg-indigo-100">KEY DEFINITIONS: BASICS</h2>
+            <div class="grid grid-cols-4 gap-2 text-[9px]">
+                <div><span class="font-bold text-indigo-700">Inference:</span> Drawing conclusions about a population based on a sample.</div>
+                <div><span class="font-bold text-indigo-700">Central Limit Theorem:</span> Means of samples are Normally distributed, even if data isn't (if N &gt; 30).</div>
+                <div><span class="font-bold text-indigo-700">Standard Error (SE):</span> Accuracy of the Mean estimate. (SD / sqrt(N)).</div>
+                <div><span class="font-bold text-indigo-700">p-value:</span> Prob. of seeing data AT LEAST this extreme if Null Hypothesis is true.</div>
+                <div><span class="font-bold text-indigo-700">Type I Error (&alpha;):</span> Rejecting H0 when it is actually True (False Positive).</div>
+                <div><span class="font-bold text-indigo-700">Type II Error (&beta;):</span> Failing to reject H0 when it is False (False Negative).</div>
+                <div><span class="font-bold text-indigo-700">Power (1-&beta;):</span> Probability of correctly finding an effect that exists.</div>
+                <div><span class="font-bold text-indigo-700">Degrees of Freedom:</span> Number of values free to vary (usually N-1).</div>
+            </div>
+        </div>
+        <div class="section-box col-span-3 bg-slate-50">
+            <h2 class="text-center text-sm">5. STATISTICAL TEST SELECTION GUIDE</h2>
+            <table class="w-full">
+                <thead class="bg-blue-100">
+                    <tr>
+                        <th>Goal / Data Type</th>
+                        <th>Condition / Groups</th>
+                        <th>Parametric (Normal)</th>
+                        <th>Non-Parametric (Non-Normal)</th>
+                        <th>R Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2"><strong>Compare 1 Mean/Med</strong><br>(vs Reference)</td>
+                        <td>Reference Value</td>
+                        <td><strong>One-sample T-test</strong></td>
+                        <td><strong>Wilcoxon Signed Rank</strong></td>
+                        <td><span class="func">t.test(x, mu=v)</span><br><span class="func">wilcox.test(x, mu=v)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Proportion vs Ref</td>
+                        <td colspan="2" class="text-center"><strong>Binomial / Prop Test</strong></td>
+                        <td><span class="func">prop.test()</span> / <span class="func">binom.test()</span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Compare 2 Groups</strong><br>(Continuous Y)</td>
+                        <td>Independent</td>
+                        <td><strong>Student's T-test</strong><br>(Welch if var unequal)</td>
+                        <td><strong>Mann-Whitney U</strong><br>(Wilcoxon Rank Sum)</td>
+                        <td><span class="func">t.test(y~grp)</span><br><span class="func">wilcox.test(y~grp)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Paired (Before/After)</td>
+                        <td><strong>Paired T-test</strong></td>
+                        <td><strong>Wilcoxon Signed Rank</strong></td>
+                        <td><span class="func">t.test(..., paired=TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Compare > 2 Groups</strong><br>(Continuous Y)</td>
+                        <td>Independent</td>
+                        <td><strong>One-Way ANOVA</strong><br>(Post-hoc: Tukey)</td>
+                        <td><strong>Kruskal-Wallis</strong><br>(Post-hoc: Dunn/Wilcox)</td>
+                        <td><span class="func">aov(y~grp)</span><br><span class="func">kruskal.test(y~grp)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Repeated Measures</td>
+                        <td><strong>Repeated ANOVA</strong></td>
+                        <td><strong>Friedman Test</strong></td>
+                        <td><span class="func">friedman.test()</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relationship</strong><br>(2 Continuous Vars)</td>
+                        <td>Linearity</td>
+                        <td><strong>Pearson Correlation</strong></td>
+                        <td><strong>Spearman Correlation</strong></td>
+                        <td><span class="func">cor.test(x, y, method=...)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relationship</strong><br>(2 Categorical Vars)</td>
+                        <td>Contingency Table</td>
+                        <td colspan="2" class="text-center"><strong>Chi-Square Test</strong> (or Fisher's Exact if n&lt;5)</td>
+                        <td><span class="func">chisq.test(table)</span><br><span class="func">fisher.test(table)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PAGE 2: MODELING (ANOVA, LM, GLM) -->
+    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+        
+        <div class="col-span-2">
+            <h1>Pg 2: Statistical Modeling (Cours 3)</h1>
+        </div>
+
+        <!-- Linear Regression -->
+        <div class="section-box col-span-1">
+            <h2>1. Linear Regression (OLS)</h2>
+            <p><strong>Model:</strong> \( Y = \beta_0 + \beta_1 X + \epsilon \)</p>
+            <p><strong>Assumption:</strong> Residuals must be Normal & Homoscedastic.</p>
+            <p><strong>Code:</strong> <span class="func">model <- lm(Y ~ X1 + X2, data=df)</span></p>
+            <p><strong>Selection:</strong> <span class="func">stepAIC(model)</span> (Pkg: MASS). Back/Forward.</p>
+            
+            <h3>Output Interpretation (summary(model))</h3>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Estimate:</strong> Slope. Unit change in Y for 1 unit X.</li>
+                <li><strong>Pr(>|t|):</strong> Is variable significant? (< 0.05).</li>
+                <li><strong>Multiple R²:</strong> % Variance explained by model.</li>
+                <li><strong>Adj R²:</strong> Penalized for complexity. Use for model comparison.</li>
+                <li><strong>F-statistic:</strong> Is the WHOLE model significant?</li>
+            </ul>
+
+            <h3>Diagnostics (plot(model))</h3>
+            <ol class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Resid vs Fitted:</strong> Linearity check (Should be flat line).</li>
+                <li><strong>Normal Q-Q:</strong> Normality of resid (Points on line).</li>
+                <li><strong>Scale-Location:</strong> Homoscedasticity (Flat line).</li>
+                <li><strong>Cook's Dist:</strong> Influential points/outliers.</li>
+            </ol>
+            
+            <h3>Multicollinearity</h3>
+            <p>If vars strongly correlated, estimates are unstable.</p>
+            <p>Check <strong>VIF</strong> (Pkg: `car`). If VIF > 5, remove variable.</p>
+        </div>
+
+        <!-- ANOVA Family -->
+        <div class="section-box col-span-1">
+            <h2>2. The ANOVA Family</h2>
+            <p><strong>One-Way:</strong> 1 Factor (Cat) &rarr; Y (Cont). <span class="func">aov(Y~Gr)</span></p>
+            <p><strong>Two-Way:</strong> 2 Factors. Checks Main Effects + <strong>Interaction</strong>.</p>
+            <p>Code: <span class="func">aov(Y ~ A * B)</span> same as <span class="func">aov(Y ~ A + B + A:B)</span></p>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Interaction (A:B):</strong> Does effect of A depend on B?</li>
+                <li>If Global P < 0.05 &rarr; Do <strong>Post-hoc</strong> (TukeyHSD).</li>
+            </ul>
+
+            <h3>Extensions</h3>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>MANOVA:</strong> Multiple Y variables. <span class="func">manova(cbind(Y1,Y2)~X)</span>.</li>
+                <li><strong>ANCOVA:</strong> ANOVA + Continuous Covariate (to control bias).</li>
+                <li>Assumptions: No multicollinearity for MANOVA. Homogeneity of slopes for ANCOVA.</li>
+            </ul>
+
+            <h2>3. Non-Linear Models</h2>
+            <p>Use when relationship isn't a straight line.</p>
+            <ul class="grid grid-cols-3 gap-1 text-[9px]">
+                <li><strong>Quadratic:</strong> \( Y = X^2 + X \). <span class="func">lm(Y ~ poly(X,2))</span></li>
+                <li><strong>Logarithmic:</strong> Rate decreases. <span class="func">lm(Y ~ log(X))</span></li>
+                <li><strong>Exponential:</strong> Growth. <span class="func">lm(Y ~ exp(X))</span></li>
+            </ul>
+        </div>
+
+        <div class="section-box col-span-1 bg-green-50 border-green-200">
+            <h2>Answer Phrasing Templates (Memorize!)</h2>
+            <div class="space-y-0.5">
+                <p><strong>Rejecting H0 (Significant):</strong></p>
+                <p class="italic text-[9px] text-green-800">"Since p-value (0.003) &lt; α (0.05), we reject H0. We conclude there is a statistically significant difference in [Variable Y] between [Group A] and [Group B]."</p>
+                
+                <p><strong>Failing to Reject H0 (Not Sig):</strong></p>
+                <p class="italic text-[9px] text-red-800">"Since p-value (0.12) &gt; α (0.05), we fail to reject H0. We do not have sufficient evidence to demonstrate a difference..."</p>
+                
+                <p><strong>Interpreting OR/HR (e.g., 1.5):</strong></p>
+                <p class="italic text-[9px]">"The [Risk/Odds] of [Event] is 1.5 times higher in the [Treatment Group] compared to [Control], holding other variables constant."</p>
+                
+                <p><strong>Interpreting Linear Model (\(\beta\) = -3.2):</strong></p>
+                <p class="italic text-[9px]">"For every 1 unit increase in [X], [Y] decreases by 3.2 units on average."</p>
+            </div>
+        </div>
+        
+        <div class="section-box col-span-1">
+            <h2>R Code "Gotchas" &amp; Fixes</h2>
+            <ul class="space-y-0.5">
+                <li><strong>Factor Error:</strong> If R treats numbers as categories or vice versa.
+                    <br><span class="code-snippet">df$grp &lt;- as.factor(df$grp)</span> (Fixes "numeric" error in ANOVA).
+                </li>
+                <li><strong>Missing Data:</strong> Functions failing?
+                    <br>Add: <span class="code-snippet">na.rm = TRUE</span> (mean/sd) or <span class="code-snippet">use = "complete.obs"</span> (cor).
+                </li>
+                <li><strong>Formula Syntax:</strong>
+                    <br><code>Y ~ X</code> (Y depends on X).
+                    <br><code>data = df</code> (Always specify dataset).
+                </li>
+                <li><strong>Logic Operators:</strong>
+                    <br><code>==</code> (Comparison), <code>=</code> (Assignment).
+                    <br><code>!</code> (Not), <code>&amp;</code> (And), <code>|</code> (Or).
+                </li>
+                <li><strong>Square Brackets:</strong>
+                    <br><code>df[row, col]</code> &rarr; <code>df[1:5, ]</code> (First 5 rows).
+                </li>
+            </ul>
+        </div>
+
+        <!-- GLM -->
+        <div class="section-box col-span-2">
+            <h2>4. Generalized Linear Models (GLM)</h2>
+            <p>Used when Y is <strong>NOT Normal</strong> (Counts, Binary). Uses MLE (Max Likelihood), not OLS.</p>
+            <p><strong>Compare Models:</strong> R² doesn't exist. Use <strong>AIC / BIC</strong>. <span class="good">Lower is better.</span></p>
+            
+            <div class="grid grid-cols-2 gap-1 mt-2">
+                <div class="border p-0.5">
+                    <h3>A. Poisson Regression (Count Data)</h3>
+                    <p>Y = 0, 1, 2... (e.g., # of attacks).</p>
+                    <p><strong>Code:</strong> <span class="func">glm(Y ~ X, family = "poisson")</span></p>
+                    <p><strong>Assumption:</strong> Mean = Variance.</p>
+                    <p><strong>Problem: Overdispersion</strong> (Var > Mean).</p>
+                    <p>Check: Residual deviance / DF >> 1.</p>
+                    <p><strong>Fix:</strong> Use `family=quasipoisson` or Neg. Binomial (<span class="func">glm.nb</span> from MASS).</p>
+                </div>
+                <div class="border p-0.5">
+                    <h3>B. Logistic Regression (Binary Data)</h3>
+                    <p>Y = 0/1 (e.g., Sick/Healthy). Link = Logit.</p>
+                    <p><strong>Code:</strong> <span class="func">glm(Y ~ X, family = "binomial")</span></p>
+                    <p><strong>Output:</strong> Log-Odds. Need to exponentiate for OR.</p>
+                    <p><strong>Odds Ratio (OR):</strong> \( OR = \exp(\beta) \)</p>
+                    <ul class="text-[9px]">
+                        <li>OR = 1: No effect.</li>
+                        <li>OR > 1: Factor increases prob of event.</li>
+                        <li>OR < 1: Factor decreases prob of event.</li>
+                    </ul>
+                    <p><strong>Evaluation:</strong> ROC Curve, AUC (>0.5 is good), Confusion Matrix.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: MULTIVARIATE & MACHINE LEARNING -->
+    <div class="page-break grid grid-cols-2 gap-2 p-2 h-[290mm]">
+        
+        <div class="col-span-2">
+            <h1>Pg 3: Multivariate Analysis & ML (Cours 4)</h1>
+        </div>
+
+        <!-- PCA -->
+        <div class="section-box col-span-2">
+            <h2>1. Dimensionality Reduction (PCA)</h2>
+            <p><strong>Goal:</strong> Reduce variables (continuous) into Principal Components (PCs) while keeping variance.</p>
+            <p><strong>Pkg:</strong> `FactoMineR` & `factoextra`.</p>
+            <p><strong>Code:</strong> <span class="func">PCA(df, scale.unit=TRUE, graph=T)</span> <span class="warn">ALWAYS SCALE!</span></p>
+            
+            <div class="grid grid-cols-3 gap-0.5">
+                <div>
+                    <h3>Scree Plot (Eigenvalues)</h3>
+                    <p>Bar chart of % variance explained by each PC.</p>
+                    <p><strong>Decision:</strong> Keep PCs until "Elbow" or >80% total variance.</p>
+                </div>
+                <div>
+                    <h3>Variables Plot (Circle)</h3>
+                    <p><strong>Arrows same dir:</strong> Pos Correlation.</p>
+                    <p><strong>Opposite dir:</strong> Neg Correlation.</p>
+                    <p><strong>90° Angle:</strong> Uncorrelated.</p>
+                    <p><strong>Length:</strong> Quality of representation on axis.</p>
+                </div>
+                <div>
+                    <h3>Other Methods</h3>
+                    <p><strong>MCA:</strong> For Categorical vars (Survey).</p>
+                    <p><strong>FAMD:</strong> Mixed (Cat + Cont).</p>
+                    <p><strong>FCA (CA):</strong> 2 Cat variables (Contingency).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box col-span-2">
+            <h2>Visual Analysis Cheat Keys</h2>
+            <div class="grid grid-cols-4 gap-0.5">
+                <div>
+                    <h3>Boxplot</h3>
+                    <p><strong>Thick Line:</strong> Median.</p>
+                    <p><strong>Box:</strong> IQR (25th-75th %).</p>
+                    <p><strong>Whiskers:</strong> 1.5 * IQR.</p>
+                    <p><strong>Dots:</strong> Outliers.</p>
+                </div>
+                <div>
+                    <h3>ROC Curve</h3>
+                    <p><strong>X-axis:</strong> 1 - Specificity (FPR).</p>
+                    <p><strong>Y-axis:</strong> Sensitivity (TPR).</p>
+                    <p><strong>Diagonal:</strong> Random guess (AUC=0.5).</p>
+                    <p><strong>Top-Left:</strong> Perfect model.</p>
+                </div>
+                <div>
+                    <h3>Dendrogram (Cluster)</h3>
+                    <p><strong>Height:</strong> Dissimilarity.</p>
+                    <p><strong>Cut:</strong> Draw horizontal line.</p>
+                    <p><strong>Count:</strong> # of vertical lines crossed = k clusters.</p>
+                </div>
+                <div>
+                    <h3>Interaction Plot</h3>
+                    <p><strong>Parallel Lines:</strong> No Interaction.</p>
+                    <p><strong>Crossing Lines:</strong> Strong Interaction.</p>
+                    <p>(Effect of A flips based on B).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clustering -->
+        <div class="section-box col-span-1">
+            <h2>2. Unsupervised Learning: Clustering</h2>
+            <p><strong>Goal:</strong> Group data without labels.</p>
+            
+            <h3>K-Means</h3>
+            <p>Partition into K groups. Centroid based.</p>
+            <p><strong>Code:</strong> <span class="func">kmeans(df, centers=K)</span></p>
+            <p><strong>Finding K (Elbow Method):</strong></p>
+            <p>Plot Total Within Sum of Squares vs K. Look for bend.</p>
+            <p><span class="func">fviz_nbclust(df, kmeans, method="wss")</span></p>
+        </div>
+
+        <!-- Classification -->
+        <div class="section-box col-span-1">
+            <h2>3. Supervised Learning: Classification</h2>
+            <p><strong>Goal:</strong> Predict Class (Y) using inputs.</p>
+            
+            <h3>A. Linear Discriminant Analysis (LDA)</h3>
+            <p>Finds linear combo to separate groups. Pkg: `MASS`.</p>
+            <p>Assumes normality & equal covariance.</p>
+            <p><span class="func">lda(Y ~ ., data=df)</span></p>
+
+            <h3>B. Decision Trees (CART)</h3>
+            <p>Flowchart style. Pkg: `rpart`.</p>
+            <p><strong>Pros:</strong> Visual, no normalization needed.</p>
+            <p><strong>Cons:</strong> Overfitting.</p>
+            <p><strong>Fix: Pruning</strong> (Cut branches). Check <code>plotcp()</code> for optimal CP value.</p>
+        </div>
+
+        <!-- Metrics -->
+        <div class="section-box col-span-2">
+            <h2>4. Model Evaluation Metrics</h2>
+            <p>Based on <strong>Confusion Matrix</strong> (Predicted vs Actual).</p>
+            <table class="text-center w-1/2 mx-auto mb-2">
+                <tr><td></td><td>Pred 1</td><td>Pred 0</td></tr>
+                <tr><td>Act 1</td><td>TP</td><td>FN</td></tr>
+                <tr><td>Act 0</td><td>FP</td><td>TN</td></tr>
+            </table>
+            <ul class="grid grid-cols-2 gap-1">
+                <li><strong>Sensitivity (Recall):</strong> \( TP / (TP+FN) \) - Ability to find Positives.</li>
+                <li><strong>Specificity:</strong> \( TN / (TN+FP) \) - Ability to find Negatives.</li>
+                <li><strong>Accuracy:</strong> \( (TP+TN) / Total \)</li>
+                <li><strong>PPV (Precision):</strong> \( TP / (TP+FP) \)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PAGE 4: CLINICAL TRIALS & ADVANCED STATS -->
+    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+        
+        <div class="col-span-2">
+            <h1>Pg 4: Clinical & Advanced Analysis (Cours 5, 6)</h1>
+        </div>
+
+        <!-- Clinical Trials -->
+        <div class="section-box col-span-1">
+            <h2>1. Clinical Trial Design</h2>
+            <h3>Evidence Pyramid (Low to High)</h3>
+            <p>Opinion &rarr; Case Series &rarr; Cross-Sectional &rarr; Case-Control &rarr; Cohort &rarr; <strong>RCT</strong> &rarr; <strong>Meta-Analysis</strong>.</p>
+            
+            <h3>Study Types</h3>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Observational:</strong> No intervention.
+                    <ul>
+                        <li><em>Cohort:</em> Forward (Exp &rarr; Outcome). Risk factors.</li>
+                        <li><em>Case-Control:</em> Backward (Outcome &rarr; Exp). Rare diseases.</li>
+                        <li><em>Cross-Sectional:</em> Snapshot. Prevalence.</li>
+                    </ul>
+                </li>
+                <li><strong>Experimental (RCT):</strong> Randomized. Gold Standard.
+                    <ul>
+                        <li><em>Parallel:</em> Group A vs B.</li>
+                        <li><em>Crossover:</em> A then B (Washout period). Own control.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Bias & Terminology</h3>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li><strong>Selection Bias:</strong> Groups differ at start (Fix: Randomize).</li>
+                <li><strong>Performance Bias:</strong> Care differs (Fix: Blind/Double Blind).</li>
+                <li><strong>Attrition Bias:</strong> Dropouts.</li>
+                <li><strong>Phases:</strong> I (Safety), II (Dose/Efficacy), III (Large Comp), IV (Post-market).</li>
+            </ul>
+        </div>
+
+        <!-- KEY DEFINITIONS: CLINICAL + Meta Analysis & Power -->
+        <div class="section-box col-span-2 bg-indigo-50 border-indigo-200">
+            <h2 class="text-indigo-900 bg-indigo-100">KEY DEFINITIONS: CLINICAL</h2>
+            <div class="grid grid-cols-3 gap-0.5 text-[9px]">
+                <div><span class="font-bold text-indigo-700">Randomization:</span> Allocating subjects by chance to reduce Selection Bias.</div>
+                <div><span class="font-bold text-indigo-700">Double-Blind:</span> Neither patient nor doctor knows the treatment (Reduces Performance Bias).</div>
+                <div><span class="font-bold text-indigo-700">Censoring:</span> In Survival Analysis, when an event (death) is NOT observed (drop out/end of study).</div>
+                <div><span class="font-bold text-indigo-700">Hazard Ratio (HR):</span> Instantaneous risk of event in Group A vs B.</div>
+                <div><span class="font-bold text-indigo-700">Intention-To-Treat (ITT):</span> Analyzing EVERYONE randomized, even if they quit (Prevents bias).</div>
+                <div><span class="font-bold text-indigo-700">Confounding Variable:</span> A 3rd var that correlates with both Exp and Outcome (e.g., Age).</div>
+                <div><span class="font-bold text-indigo-700">Heterogeneity (I²):</span> In Meta-Analysis, how much results differ between studies due to real diffs vs chance.</div>
+                <div><span class="font-bold text-indigo-700">Forest Plot:</span> Graphical display of estimated results from a number of scientific studies.</div>
+            </div>
+        </div>
+        
+        <div class="section-box col-span-1 bg-red-50 border-red-200">
+            <h2>Scientific Article: Bias Checklist</h2>
+            <p class="text-[9px] mb-1">Scan the "Methods" and "Discussion" for these flaws:</p>
+            <ul class="list-disc ml-3 space-y-0.5">
+                <li><strong>Selection Bias:</strong> Was the sample random? Or were they volunteers (healthier)?
+                    <br><em>Check:</em> Table 1 (Baseline Characteristics) differences.</li>
+                <li><strong>Attrition Bias:</strong> Did many people quit?
+                    <br><em>Check:</em> Flowchart. If &gt;20% dropout, validity is compromised.</li>
+                <li><strong>Analysis Method:</strong>
+                    <br><strong>ITT (Intention to Treat):</strong> Analyzed in original groups (Gold Standard).
+                    <br><strong>PP (Per Protocol):</strong> Analyzed only if they finished meds (Biased).</li>
+                <li><strong>Confounding:</strong> Did they adjust for Age/Sex?
+                    <br><em>Look for:</em> "Adjusted Odds Ratio" or "Multivariate Analysis".</li>
+                <li><strong>Conflict of Interest:</strong> Who funded the study? (Pharma company?).</li>
+            </ul>
+        </div>
+        <div class="section-box col-span-1">
+            <h2>2. Meta-Analysis & Power</h2>
+            <h3>Sample Size / Power (Pkg: `pwr`)</h3>
+            <p>Power (\(1-\beta\)): Prob to detect effect. Target 80% (0.8).</p>
+            <p>Depends on: Effect Size (d), N, Alpha.</p>
+            <p><span class="func">pwr.t.test(d=..., power=0.8, sig.level=0.05)</span></p>
+
+            <h3>Meta-Analysis (Pkg: `meta`)</h3>
+            <p>Synthesize multiple studies. Key Viz: <strong>Forest Plot</strong>.</p>
+            <p><strong>Heterogeneity (I²):</strong> Inconsistency across studies.</p>
+            <ul class="grid grid-cols-2 gap-1 text-[9px]">
+                <li>I² < 25% (Low) &rarr; Fixed Effects Model.</li>
+                <li>I² > 50% (High) &rarr; Random Effects Model.</li>
+            </ul>
+            <p><strong>Bias Check:</strong> Funnel Plot (Asymmetry = Publication Bias).</p>
+        </div>
+
+        <!-- Survival Analysis -->
+        <div class="section-box col-span-2">
+            <h2>3. Survival Analysis</h2>
+            <p><strong>Goal:</strong> Time until event (Death/Relapse). Handles <strong>Censoring</strong> (Event didn't happen yet).</p>
+            <p><strong>Pkg:</strong> `survival`, `survminer`.</p>
+
+            <div class="grid grid-cols-2 gap-0.5">
+                <div>
+                    <h3>Kaplan-Meier (KM)</h3>
+                    <p>Non-parametric estimation of survival function S(t).</p>
+                    <p><strong>Curve:</strong> Steps down when event occurs.</p>
+                    <p><strong>Comparison:</strong> <strong>Log-Rank Test</strong>.</p>
+                    <p>Code: <span class="func">survdiff(Surv(time, status) ~ group)</span></p>
+                    <p><em>H0: Survival curves are identical.</em></p>
+                </div>
+                <div>
+                    <h3>Cox Proportional Hazards</h3>
+                    <p>Multivariate regression for survival.</p>
+                    <p><strong>Metric:</strong> Hazard Ratio (HR).</p>
+                    <p>Code: <span class="func">coxph(Surv(time, status) ~ Age + Sex)</span></p>
+                    <ul class="text-[9px]">
+                        <li>HR = 1: No effect.</li>
+                        <li>HR > 1: Increases risk (Hazard). Bad.</li>
+                        <li>HR < 1: Decreases risk (Protective). Good.</li>
+                    </ul>
+                    <p><strong>Assumption:</strong> Prop. Hazards (Check <span class="func">cox.zph</span>).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Analysis Tips -->
+        <div class="section-box col-span-2 bg-yellow-50 border-yellow-200">
+            <h2>4. Exam Tips: Analyzing the Article</h2>
+            <ol class="list-decimal ml-3 space-y-0.5 text-[9px]">
+                <li><strong>Identify Design:</strong> Look for "Randomized" (RCT), "Retrospective" (Case-Control/Cohort).</li>
+                <li><strong>Identify PICO:</strong> Population, Intervention, Control, Outcome (Primary Endpoint).</li>
+                <li><strong>Check Table 1:</strong> Are groups balanced at baseline? (p-values should be > 0.05).</li>
+                <li><strong>Interpret Results:</strong> Look at 95% Confidence Intervals.
+                    <ul class="space-y-0.5">
+                        <li>For Difference (Mean): If CI crosses 0 &rarr; Not Sig.</li>
+                        <li>For Ratio (OR/HR/RR): If CI crosses 1 &rarr; Not Sig.</li>
+                    </ul>
+                </li>
+                <li><strong>Critique:</strong> Small N? Short duration? High dropout? Conflict of interest?</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>
