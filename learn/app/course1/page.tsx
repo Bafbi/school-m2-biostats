@@ -13,17 +13,20 @@ const questions = [
   {
     question: "What is biostatistics?",
     options: ["Study of biological systems", "Application of statistics to biological and medical data", "Analysis of big data", "Programming in R"],
-    answer: 1
+    answer: 1,
+    explanation: "Biostatistics applies statistical methods to biological and medical data to draw meaningful conclusions."
   },
   {
     question: "Which package is used for data manipulation in R?",
     options: ["ggplot2", "dplyr", "shiny", "lubridate"],
-    answer: 1
+    answer: 1,
+    explanation: "dplyr is the standard package for data manipulation (filtering, selecting, mutating) in R."
   },
   {
     question: "What does R² represent in descriptive statistics?",
     options: ["Mean value", "Proportion of variability explained", "Standard deviation", "Median"],
-    answer: 1
+    answer: 1,
+    explanation: "R² (Coefficient of Determination) represents the proportion of variance in the dependent variable that is predictable from the independent variable(s)."
   }
 ];
 
