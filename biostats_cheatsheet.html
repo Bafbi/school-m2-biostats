@@ -329,34 +329,83 @@
             </ul>
         </div>
 
-        <!-- GLM -->
+        <!-- GLM & EVALUATION EXTENDED BLOCK -->
         <div class="section-box col-span-2">
-            <h2>4. Generalized Linear Models (GLM)</h2>
-            <p>Used when Y is <strong>NOT Normal</strong> (Counts, Binary). Uses MLE (Max Likelihood), not OLS.</p>
-            <p><strong>Compare Models:</strong> R² doesn't exist. Use <strong>AIC / BIC</strong>. <span class="good">Lower is better.</span></p>
+            <h2>4. Generalized Linear Models (GLM) & Evaluation</h2>
+            <p>Used when Y is <strong>NOT Normal</strong> (Counts, Binary). Uses MLE (Max Likelihood).</p>
             
-            <div class="grid grid-cols-2 gap-1 mt-2">
-                <div class="border p-0.5">
-                    <h3>A. Poisson Regression (Count Data)</h3>
-                    <p>Y = 0, 1, 2... (e.g., # of attacks).</p>
-                    <p><strong>Code:</strong> <span class="func">glm(Y ~ X, family = "poisson")</span></p>
-                    <p><strong>Assumption:</strong> Mean = Variance.</p>
-                    <p><strong>Problem: Overdispersion</strong> (Var > Mean).</p>
-                    <p>Check: Residual deviance / DF >> 1.</p>
-                    <p><strong>Fix:</strong> Use `family=quasipoisson` or Neg. Binomial (<span class="func">glm.nb</span> from MASS).</p>
+            <!-- Model Selection -->
+            <div class="mb-2 border-b pb-1">
+                <h3>A. Model Comparison (Goodness of Fit)</h3>
+                <p><strong>\(R^2\) is NOT used.</strong> Use these instead (Compare Model A vs B):</p>
+                <div class="grid grid-cols-2 gap-2 text-[9px]">
+                    <div class="bg-slate-50 p-1">
+                        <strong>AIC (Akaike):</strong> Balances fit vs complexity.
+                        <br><span class="good">Lower is better.</span>
+                    </div>
+                    <div class="bg-slate-50 p-1">
+                        <strong>BIC (Bayesian):</strong> Penalizes variables more strictly.
+                        <br><span class="good">Lower is better.</span>
+                    </div>
+                    <div class="col-span-2">
+                        <strong>Deviance:</strong>
+                        <br><em>Null Deviance:</em> Worst model (Intercept only).
+                        <br><em>Residual Deviance:</em> Your model. (Should be much lower than Null).
+                    </div>
                 </div>
-                <div class="border p-0.5">
-                    <h3>B. Logistic Regression (Binary Data)</h3>
-                    <p>Y = 0/1 (e.g., Sick/Healthy). Link = Logit.</p>
+            </div>
+
+            <!-- Specific Models -->
+            <div class="grid grid-cols-2 gap-2">
+                <div class="border p-1">
+                    <h3>B. Poisson (Count Data)</h3>
+                    <p>Y = 0, 1, 2... (e.g., # of events).</p>
+                    <p><strong>Code:</strong> <span class="func">glm(Y ~ X, family = "poisson")</span></p>
+                    <p><strong>CRITICAL CHECK: Overdispersion</strong></p>
+                    <p>If \( \text{Residual Dev} / \text{DF} \gg 1 \), assumption violated.</p>
+                    <p><strong>Fix:</strong> <span class="func">family="quasipoisson"</span> or <span class="func">glm.nb()</span> (Neg. Binomial).</p>
+                </div>
+                
+                <div class="border p-1">
+                    <h3>C. Logistic (Binary Data)</h3>
+                    <p>Y = 0/1 (e.g., Sick/Healthy). Link=Logit.</p>
                     <p><strong>Code:</strong> <span class="func">glm(Y ~ X, family = "binomial")</span></p>
-                    <p><strong>Output:</strong> Log-Odds. Need to exponentiate for OR.</p>
-                    <p><strong>Odds Ratio (OR):</strong> \( OR = \exp(\beta) \)</p>
-                    <ul class="text-[9px]">
-                        <li>OR = 1: No effect.</li>
-                        <li>OR > 1: Factor increases prob of event.</li>
-                        <li>OR < 1: Factor decreases prob of event.</li>
+                    <p><strong>Coefficients:</strong> Log-Odds. Exponentiate for OR.</p>
+                    <p>\( OR = \exp(\beta) \). (OR>1: Risk Increase).</p>
+                </div>
+            </div>
+
+            <!-- Evaluation Metrics -->
+            <div class="mt-2 bg-yellow-50 p-1 border border-yellow-200">
+                <h3>D. Logistic Evaluation Metrics (Classification)</h3>
+                
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div>
+                        <strong>Confusion Matrix:</strong>
+                        <table class="w-full text-center text-[8px] mb-1">
+                            <tr class="bg-white"><td></td><td>Pred 1</td><td>Pred 0</td></tr>
+                            <tr><td>Act 1</td><td>TP</td><td>FN</td></tr>
+                            <tr><td>Act 0</td><td>FP</td><td>TN</td></tr>
+                        </table>
+                    </div>
+                    <div class="text-[9px] space-y-1">
+                        <p><strong>Accuracy:</strong> \(\frac{TP+TN}{Total}\)</p>
+                        <p><strong>Sensitivity (TPR):</strong> \(\frac{TP}{TP+FN}\) (Detecting Sick)</p>
+                        <p><strong>Specificity (TNR):</strong> \(\frac{TN}{TN+FP}\) (Detecting Healthy)</p>
+                    </div>
+                </div>
+
+                <div class="mt-1 pt-1 border-t border-yellow-300">
+                    <strong>ROC Curve & AUC:</strong>
+                    <ul class="text-[9px] list-disc ml-3">
+                        <li><strong>ROC:</strong> Plot of Sensitivity (Y) vs 1-Specificity (X).</li>
+                        <li><strong>AUC (Area Under Curve):</strong> Measure of discrimination.
+                            <br>0.5 = Random Guess (Diagonal Line).
+                            <br>0.7 - 0.8 = Acceptable.
+                            <br>> 0.8 = Excellent.
+                            <br>1.0 = Perfect Separation.
+                        </li>
                     </ul>
-                    <p><strong>Evaluation:</strong> ROC Curve, AUC (>0.5 is good), Confusion Matrix.</p>
                 </div>
             </div>
         </div>
