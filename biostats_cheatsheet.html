@@ -30,7 +30,7 @@
 <body class="bg-white text-slate-800">
 
     <!-- PAGE 1: BASICS & HYPOTHESIS TESTING -->
-    <div class="page-break grid grid-cols-3 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+    <div class="page-break grid grid-cols-3 grid-flow-row-dense gap-1 p-1 h-[280mm] content-start">
         
         <div class="col-span-3">
             <h1>Pg 1: Foundations & Univariate Tests (Cours 2, 3)</h1>
@@ -226,7 +226,7 @@
     </div>
 
     <!-- PAGE 2: MODELING (ANOVA, LM, GLM) -->
-    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[280mm] content-start">
         
         <div class="col-span-2">
             <h1>Pg 2: Statistical Modeling (Cours 3)</h1>
@@ -412,7 +412,7 @@
     </div>
 
     <!-- PAGE 3: MULTIVARIATE & MACHINE LEARNING -->
-    <div class="page-break grid grid-cols-2 gap-2 p-2 h-[290mm]">
+    <div class="page-break grid grid-cols-2 gap-2 p-2 h-[280mm] content-start">
         
         <div class="col-span-2">
             <h1>Pg 3: Multivariate Analysis & ML (Cours 4)</h1>
@@ -528,7 +528,7 @@
     </div>
 
     <!-- PAGE 4: CLINICAL TRIALS & ADVANCED STATS -->
-    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[290mm]">
+    <div class="page-break grid grid-cols-2 grid-flow-row-dense gap-1 p-1 h-[280mm] content-start">
         
         <div class="col-span-2">
             <h1>Pg 4: Clinical & Advanced Analysis (Cours 5, 6)</h1>
@@ -597,13 +597,79 @@
                 <li><strong>Conflict of Interest:</strong> Who funded the study? (Pharma company?).</li>
             </ul>
         </div>
-        <div class="section-box col-span-1">
-            <h2>2. Meta-Analysis & Power</h2>
-            <h3>Sample Size / Power (Pkg: `pwr`)</h3>
-            <p>Power (\(1-\beta\)): Prob to detect effect. Target 80% (0.8).</p>
-            <p>Depends on: Effect Size (d), N, Alpha.</p>
-            <p><span class="func">pwr.t.test(d=..., power=0.8, sig.level=0.05)</span></p>
+        <!-- EFFECT SIZE & POWER DETAILED BLOCK -->
+        <div class="section-box col-span-1 bg-blue-50 border-blue-200 p-1">
+            <h2>Effect Size (Magnitude) & Power</h2>
+            <p class="text-[9px] mb-1"><strong>Definition:</strong> The true magnitude of the difference. Unlike p-value, Effect Size is <strong>independent of Sample Size</strong>.</p>
+            
+            <!-- Cohen's Standards Table -->
+            <div class="mb-2">
+                <h3>Cohen's Benchmarks (Memorize!)</h3>
+                <p class="text-[8px] italic mb-1">Used in `pwr` package functions (e.g., `cohen.ES`)</p>
+                <table class="w-full text-center text-[9px] bg-white border border-blue-200">
+                    <thead class="bg-blue-100 text-blue-900">
+                        <tr>
+                            <th>Test</th>
+                            <th>Metric</th>
+                            <th>Small</th>
+                            <th>Medium</th>
+                            <th>Large</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-Test (Means)</td>
+                            <td><strong>Cohen's d</strong></td>
+                            <td>0.2</td>
+                            <td>0.5</td>
+                            <td>0.8</td>
+                        </tr>
+                        <tr>
+                            <td>Correlation</td>
+                            <td><strong>r</strong></td>
+                            <td>0.1</td>
+                            <td>0.3</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td>ANOVA</td>
+                            <td><strong>Cohen's f</strong></td>
+                            <td>0.1</td>
+                            <td>0.25</td>
+                            <td>0.4</td>
+                        </tr>
+                        <tr>
+                            <td>Chi-Square</td>
+                            <td><strong>Cohen's w</strong></td>
+                            <td>0.1</td>
+                            <td>0.3</td>
+                            <td>0.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
+            <!-- The Power Triangle -->
+            <div class="grid grid-cols-2 gap-2 text-[9px]">
+                <div>
+                    <h3>Calculation Logic</h3>
+                    <p><strong>Formula (d):</strong> \( d = \frac{\text{Mean}_1 - \text{Mean}_2}{SD_{pooled}} \)</p>
+                    <p><strong>Package:</strong> <code>pwr</code></p>
+                    <p><code>pwr.t.test(d=0.5, power=0.8, sig.level=0.05)</code></p>
+                </div>
+                <div class="bg-white p-1 border border-blue-200">
+                    <strong>The Trade-off:</strong>
+                    <ul class="list-disc ml-3">
+                        <li><strong>Big Effect?</strong> Need Small N.</li>
+                        <li><strong>Small Effect?</strong> Need Huge N.</li>
+                        <li><strong>High Power (0.9)?</strong> Need Big N.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box col-span-1">
+            <h2>2. Meta-Analysis</h2>
             <h3>Meta-Analysis (Pkg: `meta`)</h3>
             <p>Synthesize multiple studies. Key Viz: <strong>Forest Plot</strong>.</p>
             <p><strong>Heterogeneity (I²):</strong> Inconsistency across studies.</p>
@@ -612,6 +678,45 @@
                 <li>I² > 50% (High) &rarr; Random Effects Model.</li>
             </ul>
             <p><strong>Bias Check:</strong> Funnel Plot (Asymmetry = Publication Bias).</p>
+        </div>
+
+        <!-- LONGITUDINAL DATA & LMM -->
+        <div class="section-box col-span-1 bg-purple-50 border-purple-200">
+            <h2>Longitudinal Data (Mixed Models)</h2>
+            <p><strong>Goal:</strong> Analyze data with repeated measures on the same subjects over time (Correlated data).</p>
+            <p><strong>Pkg:</strong> <code>nlme</code> Function: <span class="func">lme()</span></p>
+
+            <div class="mb-1 border-b border-purple-300 pb-1">
+                <h3>Fixed vs. Random Effects</h3>
+                <ul class="text-[9px] list-disc ml-3">
+                    <li><strong>Fixed Effect:</strong> Population average (e.g., Treatment effect). Same for everyone.</li>
+                    <li><strong>Random Effect:</strong> Individual deviation. Accounts for correlation within a subject.</li>
+                </ul>
+            </div>
+
+            <div class="mb-1">
+                <h3>R Syntax (Random Effects)</h3>
+                <p><code>model <- lme(fixed = Y ~ Time, random = ..., data=df)</code></p>
+                <div class="grid grid-cols-1 gap-1 text-[9px] mt-1">
+                    <div class="bg-white p-1 border">
+                        <strong>1. Random Intercept:</strong> <code>random = ~ 1 | ID</code>
+                        <br>Subjects start at different baselines, but change at same rate.
+                    </div>
+                    <div class="bg-white p-1 border">
+                        <strong>2. Random Slope + Int:</strong> <code>random = ~ Time | ID</code>
+                        <br>Subjects start differently AND change at different rates.
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3>Covariance Structures</h3>
+                <p class="text-[8px]">How are timepoints correlated?</p>
+                <ul class="text-[8px] list-disc ml-3">
+                    <li><strong>Compound Symmetry:</strong> Equal correlation between all time points.</li>
+                    <li><strong>AR(1):</strong> Correlation decays over time (t1 is close to t2, far from t5).</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Survival Analysis -->
